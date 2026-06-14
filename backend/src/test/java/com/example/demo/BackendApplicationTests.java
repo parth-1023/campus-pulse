@@ -25,16 +25,10 @@ class BackendApplicationTests {
 	void serializationTest() throws Exception {
 		List<Incident> incidents = incidentRepository.findAll();
 		System.out.println("Fetched " + incidents.size() + " incidents.");
-		if (!incidents.isEmpty()) {
-			Incident first = incidents.get(0);
-			try {
-				String json = objectMapper.writeValueAsString(first);
-				System.out.println("Serialized incident JSON: " + json);
-			} catch (Exception e) {
-				System.err.println("SERIALIZATION FAILED!");
-				e.printStackTrace();
-				throw e;
-			}
+		for (Incident incident : incidents) {
+			String json = objectMapper.writeValueAsString(incident);
+			org.junit.jupiter.api.Assertions.assertNotNull(json);
+			org.junit.jupiter.api.Assertions.assertTrue(json.contains("\"type\":\"Point\""));
 		}
 	}
 }

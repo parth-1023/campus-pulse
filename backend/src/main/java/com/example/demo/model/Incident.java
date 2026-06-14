@@ -59,6 +59,7 @@ public class Incident {
         this.co2Level = co2Level;
     }
 
+    @JsonSerialize(using = PointSerializer.class)
     public Point getLocation() {
         return location;
     }
