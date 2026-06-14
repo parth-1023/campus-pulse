@@ -81,8 +81,8 @@ export default function App() {
   useEffect(() => {
     if (!auth.isAuthenticated || !geojsonData) return;
 
-    console.log("Fetching historical incidents from secure API...");
-    axios.get('http://localhost:8081/api/incidents')
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8081';
+    axios.get(`${backendUrl}/api/incidents`)
       .then((res) => {
         const incidents = res.data;
         setHistoricalCount(incidents.length);
@@ -133,7 +133,10 @@ export default function App() {
     if (!auth.isAuthenticated || !geojsonData) return;
 
     const client = new Client({
-      webSocketFactory: () => new SockJS('http://localhost:8081/ws-campus'),
+      webSocketFactory: () => {
+        const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8081';
+        return new SockJS(`${backendUrl}/ws-campus`);
+      },
       reconnectDelay: 5000,
 
       onConnect: () => {

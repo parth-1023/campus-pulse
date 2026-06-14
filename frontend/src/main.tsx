@@ -5,9 +5,9 @@ import './index.css'
 import App from './App.tsx'
 
 const oidcConfig = {
-  authority: 'http://localhost:8080/realms/campuspulse',
+  authority: import.meta.env.VITE_KEYCLOAK_URL || 'http://localhost:8080/realms/campuspulse',
   client_id: 'frontend-client',
-  redirect_uri: 'http://localhost:5173',
+  redirect_uri: window.location.origin,
   onSigninCallback: () => {
     // Clear URL parameters (tokens) from the address bar after successful authentication redirect
     window.history.replaceState({}, document.title, window.location.pathname);
