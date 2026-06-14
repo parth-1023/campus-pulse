@@ -1,0 +1,3 @@
+# Telemetry simulator requirements
+pandas
+pika

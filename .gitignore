@@ -1,0 +1,43 @@
+# System Files
+.DS_Store
+Thumbs.db
+
+# Project Plan (Specific Request)
+PLAN.md
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Node (Frontend) Dependencies & Build
+node_modules/
+dist/
+dist-ssr/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Python (Simulator) Artifacts
+__pycache__/
+*.pyc
+venv/
+.venv/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Java (Backend) Build Artifacts
+target/
+.mvn/wrapper/maven-wrapper.jar
+build/
+*.class
+backend/src/main/resources/application.properties
+
+# General logs
+*.log
