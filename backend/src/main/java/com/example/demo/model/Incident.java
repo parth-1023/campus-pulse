@@ -2,6 +2,8 @@ package com.example.demo.model;
 
 import jakarta.persistence.*;
 import org.locationtech.jts.geom.Point;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.example.demo.config.PointSerializer;
 
 @Entity
 @Table(name = "incidents")
@@ -19,6 +21,7 @@ public class Incident {
     // We specify the columnDefinition as geometry(Point, 4326) to map to PostGIS
     // Point type
     @Column(columnDefinition = "geometry(Point, 4326)")
+    @JsonSerialize(using = PointSerializer.class)
     private Point location;
 
     // Constructors
