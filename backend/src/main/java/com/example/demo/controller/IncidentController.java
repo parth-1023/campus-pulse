@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/incidents")
-@CrossOrigin(origins = "http://localhost:5173") // Authorize CORS requests from Vite React frontend
+@CrossOrigin(origins = "*") // Authorize CORS requests from any origin (secured by JWT)
 public class IncidentController {
 
     private final IncidentRepository incidentRepository;
