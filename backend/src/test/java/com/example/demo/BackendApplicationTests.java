@@ -2,7 +2,7 @@ package com.example.demo;
 
 import com.example.demo.model.Incident;
 import com.example.demo.repository.IncidentRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,7 +15,9 @@ class BackendApplicationTests {
 	@Autowired
 	private IncidentRepository incidentRepository;
 
-	private final ObjectMapper objectMapper = new ObjectMapper();
+	@Autowired
+	private ObjectMapper objectMapper;
+
 
 	@Test
 	void contextLoads() {

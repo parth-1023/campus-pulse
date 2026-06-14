@@ -1,6 +1,6 @@
 package com.example.demo.config;
 
-import com.fasterxml.jackson.databind.module.SimpleModule;
+import tools.jackson.databind.module.SimpleModule;
 import org.locationtech.jts.geom.Point;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

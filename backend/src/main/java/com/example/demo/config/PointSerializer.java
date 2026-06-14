@@ -1,23 +1,26 @@
 package com.example.demo.config;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.SerializerProvider;
+import tools.jackson.core.JsonGenerator;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.SerializationContext;
+import tools.jackson.databind.ser.std.StdSerializer;
 import org.locationtech.jts.geom.Point;
 
-import java.io.IOException;
+public class PointSerializer extends StdSerializer<Point> {
 
-public class PointSerializer extends JsonSerializer<Point> {
+    public PointSerializer() {
+        super(Point.class);
+    }
 
     @Override
-    public void serialize(Point value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+    public void serialize(Point value, JsonGenerator gen, SerializationContext ctxt) throws JacksonException {
         if (value == null) {
             gen.writeNull();
             return;
         }
         gen.writeStartObject();
-        gen.writeStringField("type", "Point");
-        gen.writeArrayFieldStart("coordinates");
+        gen.writeStringProperty("type", "Point");
+        gen.writeArrayPropertyStart("coordinates");
         gen.writeNumber(value.getX()); // longitude (x)
         gen.writeNumber(value.getY()); // latitude (y)
         gen.writeEndArray();
