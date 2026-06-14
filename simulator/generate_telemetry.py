@@ -19,12 +19,13 @@ def main():
         print(f"Error: Telemetry CSV file not found at {csv_path}. Please run generate_oulu_data.py first.")
         return
 
-    # 1. Connect to local RabbitMQ broker (credentials defined in docker-compose)
-    print("Connecting to RabbitMQ...")
-    credentials = pika.PlainCredentials('guest', 'guest')
-    connection = pika.BlockingConnection(
-        pika.ConnectionParameters(host='localhost', port=5673, credentials=credentials)
-    )
+    # 1. Connect to RabbitMQ broker (defaults to local docker-compose port 5673)
+    rabbitmq_url = os.environ.get('RABBITMQ_PRIVATE_URL', os.environ.get('RABBITMQ_URL', 'amqp://guest:guest@localhost:5673'))
+    # Hide password in logs if present
+    display_url = rabbitmq_url.split('@')[-1] if '@' in rabbitmq_url else rabbitmq_url
+    print(f"Connecting to RabbitMQ at {display_url}...")
+    parameters = pika.URLParameters(rabbitmq_url)
+    connection = pika.BlockingConnection(parameters)
     channel = connection.channel()
 
     # 2. Declare a Topic Exchange
